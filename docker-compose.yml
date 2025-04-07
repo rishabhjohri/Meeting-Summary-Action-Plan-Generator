@@ -1,0 +1,37 @@
+# Docker Compose file for microservices 
+version: "3.9"
+
+services:
+
+  upload_service:
+    build: ./upload_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./upload_service:/app
+
+  summarizer_service:
+    build: ./summarizer_service
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./summarizer_service:/app
+
+  planner_service:
+    build: ./planner_service
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./planner_service:/app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - upload_service
+      - summarizer_service
+      - planner_service
+
