@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: planner-deployment
+  namespace: msa-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: planner
+  template:
+    metadata:
+      labels:
+        app: planner
+    spec:
+      containers:
+      - name: planner
+        image: gcr.io/YOUR_PROJECT_ID/planner-service:latest
+        ports:
+        - containerPort: 8002
