@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: summarizer-deployment
+  namespace: msa-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: summarizer
+  template:
+    metadata:
+      labels:
+        app: summarizer
+    spec:
+      containers:
+      - name: summarizer
+        image: gcr.io/YOUR_PROJECT_ID/summarizer-service:latest
+        ports:
+        - containerPort: 8001
