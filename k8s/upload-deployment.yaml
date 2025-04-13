@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upload-deployment
+  namespace: msa-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: upload
+  template:
+    metadata:
+      labels:
+        app: upload
+    spec:
+      containers:
+      - name: upload
+        image: gcr.io/YOUR_PROJECT_ID/upload-service:latest
+        ports:
+        - containerPort: 8000
